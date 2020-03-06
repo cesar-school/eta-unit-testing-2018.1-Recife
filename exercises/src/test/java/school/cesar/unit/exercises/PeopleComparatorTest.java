@@ -24,6 +24,16 @@ public class PeopleComparatorTest {
             public LocalDate getCurrentDate(){
                 return now;
             }
+
+            @Override
+            public LeapYearCalculator getLeapYearCalculator() {
+                return new LeapYearCalculator() {
+                    @Override
+                    public boolean isCurrentYearLeapYear() {
+                        return false;
+                    }
+                };
+            }
         };
         personBuilder = new PersonBuilder();
     }

@@ -5,19 +5,25 @@ import java.time.Month;
 
 public class PeopleComparator {
 
+    private LeapYearCalculator leapYearCalculator = new LeapYearCalculator();
+
     public LocalDate getCurrentDate(){
         return LocalDate.now();
     }
 
+    public LeapYearCalculator getLeapYearCalculator() {
+        return leapYearCalculator;
+    }
+
     public boolean isTodayPersonsBirthDay(Person person){
-        LeapYearCalculator leapYearCalculator = new LeapYearCalculator();
         LocalDate now = getCurrentDate();
         LocalDate birthday = person.getBirthday();
 
         if (now.getMonth() == birthday.getMonth() && now.getDayOfMonth() == birthday.getDayOfMonth()){
             return true;
-        };
-        if(!leapYearCalculator.isCurrentYearLeapYear()
+        }
+
+        if (!this.getLeapYearCalculator().isCurrentYearLeapYear()
                 && now.getDayOfMonth() == 1 && now.getMonth() == Month.MARCH
                 && birthday.getDayOfMonth() == 29 && birthday.getMonth() == Month.FEBRUARY){
             return true;
